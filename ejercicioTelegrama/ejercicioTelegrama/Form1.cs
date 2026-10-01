@@ -18,6 +18,7 @@ namespace ejercicioTelegrama
         public Form1()
         {
             InitializeComponent();
+            rbOrdinario.Checked = true; // Establece ordinario como opción predeterminada al arrancar
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,12 +30,20 @@ namespace ejercicioTelegrama
 
             //Leo el telegrama 
             textoTelegrama = txtTelegrama.Text;
-            // telegrama urgente?
-            if (cbUrgente.Checked)
+
+            // Determinar tipo de telegrama mediante RadioButtons (Punto 19)
+            if (rbUrgente.Checked)
+            {
                 tipoTelegrama = 'u';
+            }
+            else if (rbOrdinario.Checked)
+            {
+                tipoTelegrama = 'o';
+            }
+
             //Obtengo el número de palabras que forma el telegrama
-            char[] chars = {'', '.', ',', ';', ':', '?', '\n', '\r'}; // Solucionador por usuario 2
-            numPalabras = textoTelegrama.Split(chars).Count;
+            char[] chars = {' ', '.', ',', ';', ':', '?', '\n', '\r'}; // Solucionador por usuario 2
+            numPalabras = textoTelegrama.Split(chars).Count();
             //Si el telegrama es ordinario
             if (tipoTelegrama == 'o')
                 if (numPalabras <= 10)
